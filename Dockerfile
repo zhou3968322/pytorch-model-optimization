@@ -1,8 +1,7 @@
 FROM nvidia/cuda:10.1-base
 MAINTAINER bingchengzhou@foxmail.com
-
-RUN apt-get update && apt-get install -y libopencv-dev libxrender-dev libsm6 libxext6 && rm -rf /var/lib/apt/lists/*
-
+ENV DEBIAN_FRONTEND="noninteractive"
+RUN  apt-get update && apt-get install -y libopencv-dev libxrender-dev libsm6 libxext6 && rm -rf /var/lib/apt/lists/*
 RUN apt update && apt-get install -y --no-install-recommends curl && \
  curl -LO http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
  bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b &&\
