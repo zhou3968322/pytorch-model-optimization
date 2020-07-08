@@ -7,6 +7,10 @@
 # -*- coding:utf-8 -*-
 # email:bingchengzhou@foxmail.com
 # create: 2020/7/8
+import os
+import sys
+BASEDIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASEDIR)
 import torch
 import tensorflow as tf
 from src.utils import load_charsets, decode_time_pos
@@ -15,11 +19,11 @@ import time
 
 
 def main():
-    model_path_dict = {"cnn": "data/models/document_onnx_cnn_graph.pb",
-                       "lstm1": "data/models/document_onnx_lstm1_graph.pb",
-                       "embedding1": "data/models/document_onnx_embedding1_graph.pb",
-                       "lstm2": "data/models/document_onnx_lstm2_graph.pb",
-                       "embedding2": "data/models/document_onnx_embedding2_graph.pb"}
+    model_path_dict = {"cnn": os.path.join(BASEDIR, "data/models/document_onnx_cnn_graph.pb"),
+                       "lstm1": os.path.join(BASEDIR, "data/models/document_onnx_lstm1_graph.pb"),
+                       "embedding1": os.path.join(BASEDIR, "data/models/document_onnx_embedding1_graph.pb"),
+                       "lstm2": os.path.join(BASEDIR, "data/models/document_onnx_lstm2_graph.pb"),
+                       "embedding2": os.path.join(BASEDIR, "data/models/document_onnx_embedding2_graph.pb")}
     alphabet = load_charsets("/data/models/document/doc_charset.txt") + '卐'
     graph = tf.Graph()
     with graph.as_default():

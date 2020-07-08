@@ -7,6 +7,10 @@
 # -*- coding:utf-8 -*-
 # email:bingchengzhou@foxmail.com
 # create: 2020/7/8
+import os
+import sys
+BASEDIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASEDIR)
 import torch
 from src.torch_module import CRNN
 from src.utils import load_charsets, decode_time_pos
@@ -19,8 +23,8 @@ def test_batch():
     channel = 1
     nclass = 5540
     nh = 256
-    torch_model_path = "../data/models/document/netCRNN-epoch1-step1297999-lr1e-05-loss4.8294-acc0.7528.pth"
-    charsets_path = "../data/models/document/doc_charset.txt"
+    torch_model_path = os.path.join(BASEDIR, "data/models/document/netCRNN-epoch1-step1297999-lr1e-05-loss4.8294-acc0.7528.pth")
+    charsets_path = os.path.join(BASEDIR, "data/models/document/doc_charset.txt")
     alphabet = load_charsets(charsets_path) + '卐'
     torch_crnn_model = CRNN(imgH, channel, nclass, nh)
     device = torch.device('cuda')

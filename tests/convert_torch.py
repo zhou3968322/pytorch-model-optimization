@@ -7,14 +7,18 @@
 # -*- coding:utf-8 -*-
 # email:bingchengzhou@foxmail.com
 # create: 2020/7/8
+import os
+import sys
+BASEDIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASEDIR)
 import argparse
 from src.torch2onnx import convert_crnn2onnx, convert_onnx2tf
 
 
 def main():
     parser = argparse.ArgumentParser()
-    document_model_path = "../data/models/document/netCRNN-epoch1-step1297999-lr1e-05-loss4.8294-acc0.7528.pth"
-    default_onnx_pref = "data/models/document_onnx"
+    document_model_path = os.path.join(BASEDIR, "data/models/document/netCRNN-epoch1-step1297999-lr1e-05-loss4.8294-acc0.7528.pth")
+    default_onnx_pref = os.path.join(BASEDIR, "data/models/document_onnx")
     parser.add_argument('--torch_model_path', help='torch model path', default=document_model_path)
     parser.add_argument('--onnx_model_pref', help='onnx model path', default=default_onnx_pref)
     opt = parser.parse_args()
