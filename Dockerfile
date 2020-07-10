@@ -12,7 +12,7 @@ RUN apt update && apt-get install -y --no-install-recommends curl && \
 ENV PATH=/miniconda/bin:${PATH}
 
 RUN conda update -y conda
-RUN conda install pip && conda install -y pytorch torchvision cudatoolkit=10.1
+RUN conda install pip && conda install -y pytorch torchvision cudatoolkit=10.1 -c pytorch
 RUN conda install -y tensorflow
 RUN pip install Cython==0.28.5
 RUN rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
