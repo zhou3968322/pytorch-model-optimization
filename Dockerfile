@@ -12,12 +12,8 @@ RUN apt update && apt-get install -y --no-install-recommends curl && \
 ENV PATH=/miniconda/bin:${PATH}
 
 RUN conda update -y conda
-RUN conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-RUN conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-RUN conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
-RUN conda config --set show_channel_urls yes
-
-RUN conda install pip && conda install -y pytorch torchvision cudatoolkit=10.2 && conda install tensorflow-gpu
+RUN conda install pip && conda install -y pytorch torchvision cudatoolkit=10.1
+RUN conda install -y tensorflow
 RUN pip install Cython==0.28.5
 RUN rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -25,7 +21,7 @@ ADD ./requirements.txt /root/requirements.txt
 RUN cd /root && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt && rm -rf requirements.txt
 
 RUN apt update && apt-get install -y --no-install-recommends git && \
-    cd /root && git clone https://github.com/onnx/onnx-tensorflow.git && cd onnx-tensorflw && \
+    cd /root && git clone https://github.com/onnx/onnx-tensorflow.git && cd onnx-tensorflow && \
     pip install -e . && cd .. && rm -rf onnx-tensorflow && \
     apt-get purge --autoremove -y git && \
     rm -rf /var/lib/apt/lists/*
@@ -47,7 +43,7 @@ EXPOSE 22
 
 ADD ./data /root/workspace/data
 ADD ./src /root/workspace/src
-ADD ./tests /root/workspce/tests
+ADD ./tests /root/workspace/tests
 
 CMD /usr/sbin/sshd -D
 
