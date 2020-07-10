@@ -13,7 +13,7 @@ ENV PATH=/miniconda/bin:${PATH}
 
 RUN conda update -y conda
 RUN conda install pip && conda install -y pytorch torchvision cudatoolkit=10.1 -c pytorch
-RUN conda install -y tensorflow
+RUN pip install tensorflow==2.1.0
 RUN pip install Cython==0.28.5
 RUN rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -22,7 +22,7 @@ RUN cd /root && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requi
 
 RUN apt update && apt-get install -y --no-install-recommends git && \
     cd /root && git clone https://github.com/onnx/onnx-tensorflow.git && cd onnx-tensorflow && \
-    pip install -e . && cd .. && rm -rf onnx-tensorflow && \
+    pip install -e .  && \
     apt-get purge --autoremove -y git && \
     rm -rf /var/lib/apt/lists/*
 

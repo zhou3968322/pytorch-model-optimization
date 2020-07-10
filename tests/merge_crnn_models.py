@@ -24,7 +24,7 @@ def main():
                        "embedding1": os.path.join(BASEDIR, "data/models/document_onnx_embedding1_graph.pb"),
                        "lstm2": os.path.join(BASEDIR, "data/models/document_onnx_lstm2_graph.pb"),
                        "embedding2": os.path.join(BASEDIR, "data/models/document_onnx_embedding2_graph.pb")}
-    alphabet = load_charsets("/data/models/document/doc_charset.txt") + '卐'
+    alphabet = load_charsets( os.path.join(BASEDIR, "data/models/document/doc_charset.txt")) + '卐'
     graph = tf.Graph()
     with graph.as_default():
         cnn_input = tf.compat.v1.placeholder(tf.float32, shape=[None, 1, 48, None], name="cnn_input")
