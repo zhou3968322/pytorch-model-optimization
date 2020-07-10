@@ -18,7 +18,7 @@ RUN pip install Cython==0.28.5
 RUN rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 ADD ./requirements.txt /root/requirements.txt
-RUN cd /root && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt && rm -rf requirements.txt
+RUN cd /root && pip install -i http://pypi.douban.com/simple -r requirements.txt && rm -rf requirements.txt
 
 RUN apt update && apt-get install -y --no-install-recommends git && \
     cd /root && git clone https://github.com/onnx/onnx-tensorflow.git && cd onnx-tensorflow && \
