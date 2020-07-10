@@ -13,7 +13,6 @@ ENV PATH=/miniconda/bin:${PATH}
 
 RUN conda update -y conda
 RUN conda install pip && conda install -y pytorch torchvision cudatoolkit=10.1 -c pytorch
-RUN pip install tensorflow==2.1.0
 RUN pip install Cython==0.28.5
 RUN rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
